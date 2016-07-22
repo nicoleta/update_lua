@@ -1,0 +1,57 @@
+{% load staticfiles %}
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Arbitrage Configuration</title>
+		<script type="text/javascript" src="{% static "js/jquery-1.12.3.min.js" %}"></script>
+		<script type="text/javascript" src="{% static "js/base.js" %}"></script>
+
+		<script type="text/javascript" src="{% static "js/codemirror/codemirror.js" %}"></script>
+		<script type="text/javascript" src="{% static "js/codemirror/lua.js" %}"></script>
+		<link rel="stylesheet" href="{% static "css/codemirror/codemirror.css" %}" />
+        
+
+
+        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/themes/base/jquery-ui.css" />
+
+<script type="text/javascript">
+	all_scripts = {};
+	{% for script in scripts %}
+		all_scripts["{{ script.id }}"] = {"name": "{{ script.name }}", "code": "{{ script.code|linebreaksbr }}"};
+	{% endfor %}
+</script>
+</head>
+
+<body>
+<table width="100%" border=1><tr>
+<td style="vertical-align: top; padding:15px; height:800px">
+	<table width="100%">
+	<tr><td style="width:70%; padding-bottom:10px">NAME</td>
+		<td>ACTIONS</td>
+	</tr>
+	{% for script in scripts %}
+	<tr>
+		<td>{{ script.name }}</td>
+		<td><a id="edit_{{ script.id }}" href="#" class="edit_script">View</a> | 
+			<a id="remove_{{ script.id }}" href="#" class="remove_script">Remove</a>
+		</td>
+	</tr>
+	{% endfor %}
+	</table>
+</td>
+<td style="width:70%;vertical-align: top; padding:15px;">
+<div>
+	<div>
+		<input type="text" id="id_script_name" style="width:800px" />
+	</div>
+	<hr>
+	<textarea id="id_lua_editor"></textarea>
+	<hr>
+	<button id="id_update_button" class="save_button">UPDATE</button> or 
+	<button id="id_create_button" class="save_button">SAVE AS NEW</button>
+</div>
+</td>
+</tr></table>
+</body>
+</html>

@@ -1,0 +1,4 @@
+
+django==1.8.7
+pytz==2016.4
+mongoengine
